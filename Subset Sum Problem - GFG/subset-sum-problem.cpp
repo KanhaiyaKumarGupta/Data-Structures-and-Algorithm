@@ -7,6 +7,8 @@ using namespace std;
 // } Driver Code Ends
 //User function template for C++
 
+//User function template for C++
+
 class Solution{   
 public:
    bool possible(int n, int sum , vector<int> &arr, vector<vector<int>>&dp)
@@ -19,16 +21,16 @@ public:
        {
            return false;
        }
-       if(dp[n-1][sum]!=-1)
+       if(dp[n][sum]!=-1)
        {
-           return dp[n-1][sum];
+           return dp[n][sum];
        }
        if(arr[n-1]<=sum)
        {
-          return dp[n-1][sum] =  possible(n-1,sum-arr[n-1],arr,dp) or possible(n-1,sum,arr,dp);
+          return dp[n][sum] =  possible(n-1,sum-arr[n-1],arr,dp) or possible(n-1,sum,arr,dp);
        }
        else if(arr[n-1]>sum)
-        return dp[n-1][sum] = possible(n-1,sum,arr,dp);
+        return dp[n][sum] = possible(n-1,sum,arr,dp);
    }
     bool isSubsetSum(vector<int>arr, int sum){
         // code here 
