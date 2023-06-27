@@ -7,36 +7,43 @@ using namespace std;
 // } Driver Code Ends
 //User function template for C++
 
-//User function template for C++
-
 class Solution{   
 public:
-   bool possible(int n, int sum , vector<int> &arr, vector<vector<int>>&dp)
-   {
-       if(sum==0)
-       {
-           return true;
-       }
-       if(n==0)
-       {
-           return false;
-       }
-       if(dp[n][sum]!=-1)
-       {
-           return dp[n][sum];
-       }
-       if(arr[n-1]<=sum)
-       {
-          return dp[n][sum] =  possible(n-1,sum-arr[n-1],arr,dp) or possible(n-1,sum,arr,dp);
-       }
-       else if(arr[n-1]>sum)
-        return dp[n][sum] = possible(n-1,sum,arr,dp);
-   }
+   bool subsetsum(int n, int sum, vector<int>&arr , vector<vector<int>> &dp)
+{
+    if (n== 0 && sum == 0)
+    {
+        return true;
+    }
+    if(n==0 && sum!=0)
+    {
+        return false;
+    }
+    if(n!=0 && sum ==0)
+    {
+        return true;
+    }
+    
+    if(dp[n][sum]!=-1)
+    {
+        return dp[n][sum];
+    }
+    bool flag;
+    if (arr[n - 1] <= sum)
+    {
+        flag = subsetsum(n - 1, sum - arr[n - 1], arr,dp) or subsetsum(n - 1, sum, arr,dp);
+    }
+    else
+    {
+        flag = subsetsum(n - 1, sum, arr,dp);
+    }
+    return dp[n][sum] = flag;
+}
     bool isSubsetSum(vector<int>arr, int sum){
-        // code here 
+        // code here
         int n = arr.size();
-        vector<vector<int>> dp(n+1,vector<int>(sum+1, -1));
-        return possible(n,sum,arr,dp);
+        vector<vector<int>> dp(n+1,vector<int>(sum+1,-1));
+        return subsetsum(n,sum,arr,dp);
     }
 };
 
