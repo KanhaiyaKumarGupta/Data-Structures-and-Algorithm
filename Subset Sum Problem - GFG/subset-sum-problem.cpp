@@ -9,41 +9,33 @@ using namespace std;
 
 class Solution{   
 public:
-   bool subsetsum(int n, int sum, vector<int>&arr , vector<vector<int>> &dp)
-{
-    if (n== 0 && sum == 0)
-    {
-        return true;
-    }
-    if(n==0 && sum!=0)
-    {
-        return false;
-    }
-    if(n!=0 && sum ==0)
-    {
-        return true;
-    }
-    
-    if(dp[n][sum]!=-1)
-    {
-        return dp[n][sum];
-    }
-    bool flag;
-    if (arr[n - 1] <= sum)
-    {
-        flag = subsetsum(n - 1, sum - arr[n - 1], arr,dp) or subsetsum(n - 1, sum, arr,dp);
-    }
-    else
-    {
-        flag = subsetsum(n - 1, sum, arr,dp);
-    }
-    return dp[n][sum] = flag;
-}
     bool isSubsetSum(vector<int>arr, int sum){
-        // code here
-        int n = arr.size();
-        vector<vector<int>> dp(n+1,vector<int>(sum+1,-1));
-        return subsetsum(n,sum,arr,dp);
+        // code here 
+    int n = arr.size();
+    int dp[n + 1][sum + 1];
+    for (int i = 0; i < n + 1; i++)
+    {
+        dp[i][0] = true;
+    }
+    for (int i = 1; i < sum + 1; i++)
+    {
+        dp[0][i] = false;
+    }
+    for (int i = 1; i < n + 1; i++)
+    {
+        for (int j = 0; j < sum + 1; j++)
+        {
+            if (arr[i - 1] <= j)
+            {
+                dp[i][j] = dp[i - 1][j] or dp[i - 1][j - arr[i - 1]];
+            }
+            else
+            {
+                dp[i][j] = dp[i - 1][j];
+            }
+        }
+    }
+    return dp[n][sum];
     }
 };
 
