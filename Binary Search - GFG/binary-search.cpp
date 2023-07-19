@@ -7,32 +7,31 @@ using namespace std;
 
 // } Driver Code Ends
 // User function template for C++
-
 class Solution {
+  private:
+  int search(int arr[], int low, int high , int target)
+  {
+      if(low>high)
+      {
+          return -1;
+      }
+      int mid =  low + (high-low)/2;
+      if(arr[mid]==target)
+      {
+          return mid;
+      }
+      else if(arr[mid]>target)
+      {
+          return search(arr,low , mid-1,target);
+      }
+      return search(arr,mid+1,high,target);
+  }
   public:
-    int binarysearch(int arr[], int n, int k)
+    int binarysearch(int arr[], int n, int target)
     {
         // code here
-        int start = 0;
-        int end = n-1;
-        int mid = start + (end-start)/2;
-        while(start<=end)
-        {
-            if(arr[mid]==k)
-            {
-                return mid;
-            }
-            else if(arr[mid]>k)
-            {
-                end = mid-1;
-            }
-            else
-            {
-                start = mid+1;
-            }
-            mid = start + (end-start)/2;
-        }
-        return -1;
+        
+        return search(arr,0,n-1,target);
     }
 };
 
