@@ -10,27 +10,16 @@ using namespace std;
 
 class Solution{
 public:
-   void fun(stack<int> &s , vector<int> &nums)
-   {
-       if(s.size()==0)
+    void Reverse(stack<int> &s){
+        
+        if(s.size()==0)
         {
             return ;
         }
         int num = s.top();
         s.pop();
-        fun(s,nums);
-        nums.push_back(num);
-   }
-    void Reverse(stack<int> &s){
-        vector<int> nums;
-        fun(s,nums);
-        int n= nums.size();
-        while(n>0)
-        {
-            s.push(nums[n-1]);
-            n--;
-        }
-        
+        cout<<num<<" ";
+        Reverse(s);
     }
 };
 
