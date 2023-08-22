@@ -6,33 +6,37 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-  vector<int> max_of_subarrays(vector<int> arr, int n, int k) {
-    vector<int> ans;
-    deque<int> temp; // Using a deque for efficient removal of elements from front
-
-    // Initializing the first window
-    for (int i = 0; i < k; i++) {
-        while (!temp.empty() && arr[i] >= arr[temp.back()])
-            temp.pop_back();
-        temp.push_back(i);
+    vector<int> max_of_subarrays(vector<int> arr, int n, int k) 
+    {
+        // your code here
+        int i = 0;
+        int j = 0;
+        vector<int> ans;
+        list<int> li;
+        while(j<n)
+        {
+            while(li.size()>0 && li.back()<arr[j])
+            {
+                li.pop_back();
+            }
+            li.push_back(arr[j]);
+            if(j-i+1<k)
+            {
+                j++;
+            }
+            else if(j-i+1==k)
+            {
+                ans.push_back(li.front());
+                if(arr[i]==li.front())
+                {
+                    li.pop_front();
+                }
+                i++;
+                j++;
+            }
+        }
+        return ans;
     }
-
-    // Processing the rest of the array
-    for (int i = k; i < n; i++) {
-        ans.push_back(arr[temp.front()]); // Maximum of the previous window
-
-        while (!temp.empty() && temp.front() <= i - k)
-            temp.pop_front();
-
-        while (!temp.empty() && arr[i] >= arr[temp.back()])
-            temp.pop_back();
-
-        temp.push_back(i);
-    }
-
-    ans.push_back(arr[temp.front()]); // Maximum of the last window
-    return ans;
-}
 };
 
 //{ Driver Code Starts.
