@@ -9,22 +9,19 @@ using namespace std;
 class Solution{
 public:	
 	
-bool checkpalindrome(int i, int n, string &s)
-{
-    if (i > n / 2)
-    {
-        return true;
-    }
-    if (s[i] != s[n - i - 1])
-    {
-        return false;
-    }
-    return checkpalindrome(i + 1, n, s);
-}
+	
 	int isPalindrome(string s)
 	{
-	   int n = s.size();
-       return checkpalindrome(0,n,s);
+	    // Your code goes here
+	    int n = s.size();
+	    for(int i = 0;i<n/2;i++)
+	    {
+	        if(s[i]!=s[n-i-1])
+	        {
+	            return false;
+	        }
+	    }
+	    return true;
 	}
 
 };
