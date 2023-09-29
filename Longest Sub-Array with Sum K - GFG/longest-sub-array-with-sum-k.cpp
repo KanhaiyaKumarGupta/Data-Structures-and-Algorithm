@@ -19,15 +19,16 @@ class Solution{
                 ans = max(ans,i+1);
             }
             int target  = sum-k;
+             if(m.find(sum)==m.end())
+            {
+                m[sum] =i;
+            }
             if(m.find(target)!=m.end())
             {
                 ans = max(ans,i-m[target]);
             }
             
-            if(m.find(sum)==m.end())
-            {
-                m[sum] =i;
-            }
+            
         }
         return ans;
         
